@@ -1,0 +1,9 @@
+.appcontainer {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        width: 100%;
+        text-align: center;
+    }
+}
