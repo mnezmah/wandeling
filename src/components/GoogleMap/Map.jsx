@@ -1,44 +1,64 @@
-import React, { useState, useCallback } from "react";
-import { GoogleMap, InfoWindow, useJsApiLoader } from "@react-google-maps/api";
+import React, { useState } from "react";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useDispatch, useSelector } from "react-redux";
 
+import { addMarker } from "../../Redux/Slice";
+import { getMarkers } from "../../Redux/Selector";
 import styles from "./map.module.scss";
 
 const containerStyle = {
-    width: "400px",
-    height: "400px",
+    width: "80%",
+    height: "70vh",
 };
 
 const center = {
-    lat: -3.745,
-    lng: -38.523,
+    lat: 51.924,
+    lng: 4.478,
 };
 
 const Map = () => {
-    const [map, setMap] = useState(null);
+    const dispatch = useDispatch();
+    const [mapRef, setMapRef] = useState(null);
+    const [isMarkershown, setIsMarkerShown] = useState(false);
+    const [markerPosition, setMarkerPosition] = useState(null);
+    const markers = useSelector(getMarkers);
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: process.env.REACT_APP_TEMP_KEY,
     });
-    console.log(map);
+    console.log(mapRef);
 
-    const onLoad = useCallback(function callback(map) {
-        const bounds = new window.google.maps.LatLngBounds();
-        map.fitBounds(bounds);
-        setMap(map);
-    }, []);
+    const onLoadHandler = (map) => {
+        setMapRef(map);
+        map.addListener("click", onMapClick);
+    };
 
-    const onUnmount = useCallback(function callback(map) {
-        setMap(null);
-    }, []);
+    const onMapClick = (e) => {
+        const newMarkerPosition = {
+            lat: parseFloat(e.latLng.lat().toFixed(3)),
+            lng: parseFloat(e.latLng.lng().toFixed(3)),
+        };
+        console.log(newMarkerPosition);
+        setMarkerPosition(e.latLng);
+        setIsMarkerShown(true);
+        dispatch(addMarker(newMarkerPosition));
+    };
+
     return isLoaded ? (
         <div className={styles.mapcontainer}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={10}
-                onLoad={onLoad}
-                onUnmount={onUnmount}
-            ></GoogleMap>
+                zoom={9}
+                onLoad={onLoadHandler}
+            >
+                {!!isMarkershown && <Marker position={markerPosition} />}
+                {!!markers &&
+                    markers?.map((marker, i) => {
+                        const position = { lat: marker.lat, lng: marker.lng };
+                        return <Marker key={i} position={position}></Marker>;
+                    })}
+            </GoogleMap>
         </div>
     ) : (
         <></>

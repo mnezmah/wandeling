@@ -2,12 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 
 import { appReducer } from "./Slice";
+console.log(appReducer);
 
-const reducer = combineReducers({});
+const reducer = combineReducers({ customMap: appReducer });
 
 const store = configureStore({
     reducer,
-    appReducer,
 });
 
 export default store;
