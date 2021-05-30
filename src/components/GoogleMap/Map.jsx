@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useDispatch, useSelector } from "react-redux";
 
+import MarkersList from "../MarkersList/MarkersList";
 import { addMarker } from "../../Redux/Slice";
 import { getMarkers } from "../../Redux/Selector";
 import styles from "./map.module.scss";
 
 const containerStyle = {
-    width: "80%",
+    width: "60%",
     height: "70vh",
 };
 
@@ -45,7 +46,7 @@ const Map = () => {
     };
 
     return isLoaded ? (
-        <div className={styles.mapcontainer}>
+        <div className={styles.mapContainer}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -59,6 +60,7 @@ const Map = () => {
                         return <Marker key={i} position={position}></Marker>;
                     })}
             </GoogleMap>
+            <MarkersList />
         </div>
     ) : (
         <></>

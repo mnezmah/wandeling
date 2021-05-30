@@ -1,3 +1,9 @@
-const getMarkers = ({ customMap }) => customMap?.markers;
+const getMarkers = ({ customMap }) => {
+    const markers = customMap?.markers;
+    console.log(markers);
+    return markers;
+};
 
-export { getMarkers };
+const getUser = ({ customMap }) => customMap?.user;
+
+export { getMarkers, getUser };

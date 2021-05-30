@@ -1,8 +1,10 @@
-.mapcontainer {
+.mapContainer {
+    display: flex;
     margin-top: 2rem;
+    gap: 1rem;
 
     .map {
-        width: 50vh;
+        width: 30vh;
         height: 50vw;
     }
 }

@@ -1,17 +1,18 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
-import Home from "../Home/Home";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/Slice";
 import styles from "./signIn.module.scss";
 
 const SignIn = (props) => {
+    const dispatch = useDispatch();
     const [userName, setUserName] = useState(undefined);
     const [password, setPassword] = useState(undefined);
 
     const onClickHandler = (event) => {
         event.preventDefault();
         console.log(userName, password);
-
+        dispatch(setUser(userName));
         props.history.push("/wandeling");
     };
 

@@ -1,14 +1,19 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Map from "../GoogleMap/Map";
+import { getUser } from "../../Redux/Selector";
 import UserQuery from "../UserQuery/UserQuery";
 import styles from "./home.module.scss";
 
 const Home = () => {
+    const user = useSelector(getUser);
+
     return (
         <div className={styles.appcontainer}>
-            <h1 className={styles.title}>Wandeling</h1>
+            {!!user && (
+                <h1 className={styles.title}>Hello {user}, welcome back 😊</h1>
+            )}
             <Map></Map>
             <div className={styles.markersList}>
                 <p>user:</p>

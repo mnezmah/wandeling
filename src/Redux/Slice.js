@@ -10,15 +10,18 @@ const appSlice = createSlice({
     initialState,
     reducers: {
         addMarker: (state, action) => {
-            console.log(action.payload);
             const newState = state;
             newState.markers = [...state.markers, action.payload];
+        },
+        setUser: (state, action) => {
+            const newState = state;
+            newState.user = action.payload;
         },
     },
     extrareducers: {},
 });
-const { addMarker } = appSlice.actions;
+const { addMarker, setUser } = appSlice.actions;
 
 const appReducer = appSlice.reducer;
 
-export { appReducer, addMarker };
+export { appReducer, addMarker, setUser };
