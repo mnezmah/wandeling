@@ -2,7 +2,7 @@
 import React from "react";
 
 import Map from "../GoogleMap/Map";
-import UserQuery from "../UserQuery";
+import UserQuery from "../UserQuery/UserQuery";
 import styles from "./home.module.scss";
 
 const Home = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +27,6 @@ const Map = () => {
         id: "google-map-script",
         googleMapsApiKey: process.env.REACT_APP_TEMP_KEY,
     });
-    console.log(mapRef);
 
     const onLoadHandler = (map) => {
         setMapRef(map);

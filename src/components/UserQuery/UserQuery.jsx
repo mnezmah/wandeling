@@ -21,9 +21,7 @@ const UserQuery = () => {
     const { loading, error, data } = useQuery(USER_QUERY, {
         variables: { id },
     });
-    if (loading) {
-        console.log("loading");
-    }
+    if (loading) return <h4>Loading ...</h4>;
     if (error) {
         console.log("error:", error);
     }
