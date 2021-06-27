@@ -1,18 +1,19 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom"
 
+import Map from "../GoogleMap/Map";
 import { getUser } from "../../Redux/Selector";
-import styles from "./home.module.scss";
+import styles from "./main.module.scss";
 
 const Home = () => {
     const user = useSelector(getUser);
 
     return (
         <div className={styles.appcontainer}>
-        <Link to="/sign-in">Sign in</Link>
-        <Link to="/register">Register</Link>
+            {!!user && (
+                <h1 className={styles.title}>Hello {user}, welcome back 😊</h1>
+            )}
+            <Map></Map>
         </div>
     );
 };

@@ -39,7 +39,6 @@ const Map = () => {
             lat: parseFloat(e.latLng.lat().toFixed(3)),
             lng: parseFloat(e.latLng.lng().toFixed(3)),
         };
-        console.log(newMarkerPosition);
         setMarkerPosition(e.latLng);
         setIsMarkerShown(true);
         dispatch(addMarker(newMarkerPosition));

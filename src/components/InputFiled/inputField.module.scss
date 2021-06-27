@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input {
+        padding: 0.5rem;
+        border: 1px solid salmon;
+        border-radius: 5px;
+    }
+
+    .errorMessage {
+        color: red;
+        font-weight: 600;
+    }
+}
